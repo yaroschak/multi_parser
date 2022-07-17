@@ -1,0 +1,16 @@
+version: "3.1"
+
+services:
+
+  parser:
+    build:
+      context: .
+      dockerfile: Dockerfile.yml
+    restart: always
+    env_file:
+      - ./.env
+    #    volumes:
+    #      - "./backend/app:/Assistant/app"
+    command: "celery -A main.celery worker --loglevel=info  -n worker_dev.%h  --concurrency=1"
+
+
